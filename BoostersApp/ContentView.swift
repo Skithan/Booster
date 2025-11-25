@@ -401,11 +401,11 @@ struct ContentView: View {
                     }
                 }
                 .navigationBarHidden(true)
-                .onChange(of: joystickInput) { _, newInput in
+                .onChange(of: joystickInput) { newInput in
                     motorController.processJoystickInput(newInput)
                     updateMotorCommands() // Send to real hardware if connected
                 }
-                .onChange(of: geometry.size) { _, newSize in
+                .onChange(of: geometry.size) { newSize in
                     // Update minimized state when window size changes
                     let wasMinimized = isMinimized
                     let nowMinimized = isWindowMinimized(geometry: geometry)
