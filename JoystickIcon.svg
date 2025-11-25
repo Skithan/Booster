@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black background with subtle gradient -->
+  <defs>
+    <radialGradient id="backgroundGradient" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#424242;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#212121;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Joystick base shadow -->
+    <filter id="baseShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="8" dy="12" flood-color="#000000" flood-opacity="0.6" stdDeviation="8"/>
+    </filter>
+    
+    <!-- Knob highlight -->
+    <radialGradient id="knobGradient" cx="35%" cy="25%" r="65%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#F5F5F5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0E0E0;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Base gradient -->
+    <linearGradient id="baseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#616161;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#424242;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#212121;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" ry="180" fill="url(#backgroundGradient)" />
+  
+  <!-- Subtle pattern dots -->
+  <circle cx="150" cy="150" r="8" fill="#616161" opacity="0.3"/>
+  <circle cx="250" cy="120" r="6" fill="#616161" opacity="0.2"/>
+  <circle cx="850" cy="200" r="10" fill="#616161" opacity="0.25"/>
+  <circle cx="900" cy="350" r="7" fill="#616161" opacity="0.2"/>
+  <circle cx="80" cy="400" r="9" fill="#616161" opacity="0.3"/>
+  <circle cx="120" cy="800" r="8" fill="#616161" opacity="0.25"/>
+  <circle cx="780" cy="850" r="6" fill="#616161" opacity="0.2"/>
+  
+  <!-- Main joystick base (rounded square) -->
+  <rect x="256" y="256" width="512" height="512" rx="128" ry="128" 
+        fill="url(#baseGradient)" 
+        filter="url(#baseShadow)"
+        stroke="#9E9E9E" 
+        stroke-width="4"/>
+  
+  <!-- Base inner circle (track) -->
+  <circle cx="512" cy="512" r="200" 
+          fill="none" 
+          stroke="#757575" 
+          stroke-width="8"/>
+  
+  <!-- Direction indicators (subtle) -->
+  <!-- Top -->
+  <path d="M512 340 L502 360 L522 360 Z" fill="#BDBDBD" opacity="0.6"/>
+  <!-- Right -->  
+  <path d="M684 512 L664 502 L664 522 Z" fill="#BDBDBD" opacity="0.6"/>
+  <!-- Bottom -->
+  <path d="M512 684 L522 664 L502 664 Z" fill="#BDBDBD" opacity="0.6"/>
+  <!-- Left -->
+  <path d="M340 512 L360 522 L360 502 Z" fill="#BDBDBD" opacity="0.6"/>
+  
+  <!-- Joystick knob (positioned off-center to show movement) -->
+  <circle cx="580" cy="450" r="85" 
+          fill="url(#knobGradient)" 
+          stroke="#BDBDBD" 
+          stroke-width="3"/>
+  
+  <!-- Knob highlight shine -->
+  <ellipse cx="560" cy="430" rx="25" ry="35" 
+           fill="#FFFFFF" 
+           opacity="0.7" 
+           transform="rotate(-20 560 430)"/>
+  
+  <!-- Small center dot on knob -->
+  <circle cx="580" cy="450" r="8" fill="#9E9E9E" opacity="0.8"/>
+  
+  <!-- Movement trail (showing direction) -->
+  <circle cx="512" cy="512" r="12" fill="#E0E0E0" opacity="0.4"/>
+  <circle cx="530" cy="495" r="8" fill="#E0E0E0" opacity="0.5"/>
+  <circle cx="548" cy="478" r="6" fill="#E0E0E0" opacity="0.6"/>
+  <circle cx="565" cy="462" r="4" fill="#E0E0E0" opacity="0.7"/>
+  
+  <!-- Cart wheel indicators (bottom corners, subtle) -->
+  <circle cx="180" cy="844" r="24" fill="#E0E0E0" opacity="0.3"/>
+  <circle cx="844" cy="844" r="24" fill="#E0E0E0" opacity="0.3"/>
+  
+  <!-- Bluetooth symbol (top right, very subtle) -->
+  <g transform="translate(880, 144) scale(0.8)" opacity="0.4">
+    <path d="M12 2 L16 6 L12 10 L12 14 L20 6 L12 2 M12 6 L16 10 M12 10 L16 6" 
+          fill="none" 
+          stroke="#E0E0E0" 
+          stroke-width="2" 
+          stroke-linecap="round"/>
+  </g>
+</svg>
