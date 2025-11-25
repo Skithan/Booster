@@ -43,16 +43,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F692B5B72ED5363000522A38 /* boosters */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = boosters;
-			sourceTree = "<group>";
-		};
-		F692B5C42ED5363000522A38 /* boostersTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = boostersTests;
-			sourceTree = "<group>";
-		};
 		F692B5DE2ED53B1C00522A38 /* BoostersApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = BoostersApp;
@@ -113,8 +103,6 @@
 		F692B5AB2ED5363000522A38 = {
 			isa = PBXGroup;
 			children = (
-				F692B5B72ED5363000522A38 /* boosters */,
-				F692B5C42ED5363000522A38 /* boostersTests */,
 				F692B5DE2ED53B1C00522A38 /* BoostersApp */,
 				F692B5EC2ED53B1E00522A38 /* BoostersAppTests */,
 				F692B5F62ED53B1E00522A38 /* BoostersAppUITests */,
@@ -160,9 +148,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				F692B5B72ED5363000522A38 /* boosters */,
-			);
 			name = boosters;
 			packageProductDependencies = (
 			);
@@ -182,9 +167,6 @@
 			);
 			dependencies = (
 				F692B5C32ED5363000522A38 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F692B5C42ED5363000522A38 /* boostersTests */,
 			);
 			name = boostersTests;
 			packageProductDependencies = (
