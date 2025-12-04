@@ -181,7 +181,6 @@
 			buildPhases = (
 				F692B5D92ED53B1C00522A38 /* Sources */,
 				F692B5DA2ED53B1C00522A38 /* Frameworks */,
-				F692B5DB2ED53B1C00522A38 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -304,13 +303,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F692B5BE2ED5363000522A38 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F692B5DB2ED53B1C00522A38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -625,6 +617,7 @@
 				DEVELOPMENT_TEAM = MTU4KRR2CV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = /Users/ethanalward/Documents/GitHub/Booster/BoostersApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -653,6 +646,7 @@
 				DEVELOPMENT_TEAM = MTU4KRR2CV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = /Users/ethanalward/Documents/GitHub/Booster/BoostersApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

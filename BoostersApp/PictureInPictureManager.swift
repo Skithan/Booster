@@ -40,22 +40,18 @@ class PictureInPictureManager: NSObject, ObservableObject {
     }
     
     private func createDummyPlayer() {
-        // Create a minimal, transparent video for PiP functionality
-        // This is a workaround since PiP requires a video player
-        guard let path = Bundle.main.path(forResource: "transparent", ofType: "mp4") else {
-            // If no video file exists, create a basic AVPlayer
+        // Always use a transparent video for PiP functionality
+        if let path = Bundle.main.path(forResource: "transparent", ofType: "mp4") {
+            let url = URL(fileURLWithPath: path)
+            dummyPlayer = AVPlayer(url: url)
+        } else {
+            print("transparent.mp4 not found in bundle. Please add a 1-second transparent video to your project.")
             dummyPlayer = AVPlayer()
-            return
         }
-        
-        let url = URL(fileURLWithPath: path)
-        dummyPlayer = AVPlayer(url: url)
-        
-        // Set up the player layer
         playerLayer = AVPlayerLayer(player: dummyPlayer)
         playerLayer?.videoGravity = .resizeAspect
-        playerLayer?.frame = CGRect(x: 0, y: 0, width: 1, height: 1) // Minimal size
-        playerLayer?.opacity = 0.01 // Nearly transparent
+        playerLayer?.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        playerLayer?.opacity = 0.01
     }
     
     private func setupPiPController() {

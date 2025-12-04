@@ -361,6 +361,7 @@ struct ContentView: View {
     @State private var rightWheel = BoosterWheel(position: .right)
     @State private var isMinimized = false
     @State private var useRealBluetooth = false // Toggle between simulation and real hardware
+    @State private var isVisualPiPActive = false // Visual PiP simulation
     
     var body: some View {
         GeometryReader { geometry in
@@ -376,28 +377,63 @@ struct ContentView: View {
                         endPoint: .bottom
                     )
                     .ignoresSafeArea()
-                    
+
                     // Invisible PiP player view (required for Picture-in-Picture)
                     PiPPlayerView(pipManager: pipManager)
                         .frame(width: 1, height: 1)
                         .opacity(0.01)
                         .allowsHitTesting(false)
-                    
-                    // Check if we should show minimized version or PiP mode
-                    let windowIsMinimized = isWindowMinimized(geometry: geometry)
-                    
-                    if pipManager.isPiPActive {
-                        // Picture-in-Picture is active - show minimal interface
-                        pipModeLayout(in: geometry)
-                    } else if connectionStatus == .connected && windowIsMinimized {
-                        // Ultra-compact minimized layout when connected and window is small
-                        minimizedLayout(in: geometry)
-                    } else if geometry.size.width > geometry.size.height {
-                        // Landscape/wide layout
-                        landscapeLayout(in: geometry)
+
+                    // Visual PiP simulation: shrink content if active
+                    if isVisualPiPActive {
+                        VStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.black.opacity(0.85))
+                                    .frame(width: 220, height: 160)
+                                    .shadow(radius: 8)
+                                VStack {
+                                    Text("PiP Mode")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                    Spacer()
+                                    JoystickView(joystickInput: $joystickInput)
+                                        .scaleEffect(0.5)
+                                    Spacer()
+                                    Button(action: { isVisualPiPActive = false }) {
+                                        Text("Exit PiP")
+                                            .font(.caption)
+                                            .foregroundColor(.yellow)
+                                            .padding(6)
+                                            .background(Color.gray.opacity(0.3))
+                                            .cornerRadius(8)
+                                    }
+                                }
+                                .padding(12)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        .padding(24)
                     } else {
-                        // Portrait/compact layout
-                        portraitLayout(in: geometry)
+                        // Check if we should show minimized version or PiP mode
+                        let windowIsMinimized = isWindowMinimized(geometry: geometry)
+                        if pipManager.isPiPActive {
+                            // Picture-in-Picture is active - only transparent video is shown in PiP window
+                            VStack {
+                                Text("PiP is active. Joystick is not interactive in PiP mode due to iOS limitations.")
+                                    .font(.caption)
+                                    .foregroundColor(.yellow)
+                            }
+                        } else if connectionStatus == .connected && windowIsMinimized {
+                            // Ultra-compact minimized layout when connected and window is small
+                            minimizedLayout(in: geometry)
+                        } else if geometry.size.width > geometry.size.height {
+                            // Landscape/wide layout
+                            landscapeLayout(in: geometry)
+                        } else {
+                            // Portrait/compact layout
+                            portraitLayout(in: geometry)
+                        }
                     }
                 }
                 .navigationBarHidden(true)
@@ -409,13 +445,11 @@ struct ContentView: View {
                     // Update minimized state when window size changes
                     let wasMinimized = isMinimized
                     let nowMinimized = isWindowMinimized(geometry: geometry)
-                    
                     if wasMinimized != nowMinimized && connectionStatus == .connected {
                         // Haptic feedback when entering/exiting minimized mode
                         let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                         impactFeedback.impactOccurred()
                     }
-                    
                     withAnimation(.easeInOut(duration: 0.3)) {
                         isMinimized = nowMinimized
                     }
@@ -802,29 +836,23 @@ struct ContentView: View {
                 .background(Color.red)
                 .cornerRadius(8)
             }
-            
+
             Spacer()
-            
-            // Picture-in-Picture Button (only when connected and supported)
-            if connectionStatus == .connected && pipManager.isPiPSupported {
-                Button(action: {
-                    if pipManager.isPiPActive {
-                        pipManager.stopPictureInPicture()
-                    } else {
-                        pipManager.startPictureInPicture()
-                    }
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: pipManager.isPiPActive ? "pip.exit" : "pip.enter")
-                            .font(.title3)
-                        Text(pipManager.isPiPActive ? "Exit PiP" : "PiP")
-                            .font(.caption2)
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: 50, height: 45)
-                    .background(pipManager.isPiPActive ? Color.purple : Color.indigo)
-                    .cornerRadius(8)
+
+            // Visual PiP Button (always visible)
+            Button(action: {
+                isVisualPiPActive.toggle()
+            }) {
+                VStack(spacing: 4) {
+                    Image(systemName: isVisualPiPActive ? "pip.exit" : "pip.enter")
+                        .font(.title3)
+                    Text(isVisualPiPActive ? "Exit PiP" : "PiP")
+                        .font(.caption2)
                 }
+                .foregroundColor(.white)
+                .frame(width: 50, height: 45)
+                .background(isVisualPiPActive ? Color.purple : Color.indigo)
+                .cornerRadius(8)
             }
             
             Spacer()

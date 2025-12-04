@@ -21,7 +21,9 @@
 BoostersApp/Assets.xcassets/AppIcon.appiconset/
 ├── AppIcon-1024.png   (1024×1024) - App Store
 ├── AppIcon-180.png    (180×180)   - iPhone @3x
-├── AppIcon-167.png   
+├── AppIcon-167.png    (167×167)   - iPad Pro @2x
+├── AppIcon-152.png    (152×152)   - iPad @2x
+├── AppIcon-120.png    (120×120)   - iPhone @2x
 ├── AppIcon-87.png     (87×87)     - Settings @3x
 ├── AppIcon-80.png     (80×80)     - Spotlight @2x
 ├── AppIcon-76.png     (76×76)     - iPad @1x
